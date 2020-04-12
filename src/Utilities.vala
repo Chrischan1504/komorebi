@@ -256,7 +256,6 @@ namespace Komorebi.Utilities {
 
 		// check if the wallpaper exists
 		// also, make sure the wallpaper name is valid
-		var wallpaperPath = @"/usr/share/komorebi/$wallpaperName";
 		var wallpaperConfigPath = @"$wallpaperPath/config";
 
 		if(wallpaperName == null || !File.new_for_path(wallpaperPath).query_exists() ||
