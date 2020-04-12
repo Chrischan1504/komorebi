@@ -28,6 +28,9 @@ namespace Komorebi.OnScreen {
 	// Global - Name of active wallpaper
 	string wallpaperName;
 
+    // Global - path of active wallpaper
+    string wallpaperPath;
+
 	// Global - 24 hr time
 	bool timeTwentyFour;
 
@@ -325,7 +328,7 @@ namespace Komorebi.OnScreen {
 				
 				if(wallpaperType == "video") {
 
-					var videoPath = @"file:///usr/share/komorebi/$wallpaperName/$videoFileName";
+					var videoPath = @"file://$wallpaperPath/$videoFileName";
 					videoPlayback.uri = videoPath;
 					videoPlayback.playing = true;
 
@@ -361,7 +364,7 @@ namespace Komorebi.OnScreen {
 
 			wallpaperActor.set_content(wallpaperImage);
 
-			wallpaperPixbuf = new Gdk.Pixbuf.from_file_at_scale(@"/usr/share/komorebi/$wallpaperName/wallpaper.jpg",
+			wallpaperPixbuf = new Gdk.Pixbuf.from_file_at_scale(@"$wallpaperPath/wallpaper.jpg",
 																scaleWidth, scaleHeight, false);
 
 			wallpaperImage.set_data (wallpaperPixbuf.get_pixels(), Cogl.PixelFormat.RGB_888,

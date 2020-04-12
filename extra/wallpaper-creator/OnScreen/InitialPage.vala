@@ -39,7 +39,7 @@ namespace WallpaperCreator.OnScreen {
 
         Label chooseFileLabel = new Label("Where is the image located?");
         Box locationBox = new Box(Orientation.HORIZONTAL, 10);
-        Entry locationEntry = new Entry() { placeholder_text = "/Users/cheesecakeufo/my_picture.jpg" };
+        Entry locationEntry = new Entry() { placeholder_text = @"$(Environment.get_user_special_dir(PICTURES))/my_picture.jpg" };
         FileChooserButton chooseFileButton = new FileChooserButton("Choose File", Gtk.FileChooserAction.OPEN);
 
         Revealer revealer = new Revealer();
@@ -105,7 +105,7 @@ namespace WallpaperCreator.OnScreen {
 
                     chooseFileButton.set_filter (imageFilter);
                     chooseFileLabel.label = "Where is the image located?";
-                    locationEntry.placeholder_text = "/Users/cheesecakeufo/my_picture.jpg";
+                    locationEntry.placeholder_text = @"$(Environment.get_user_special_dir(PICTURES))/my_picture.jpg";
                     locationEntry.set_sensitive(false);
                  
                     revealer.set_reveal_child(false);
@@ -127,7 +127,7 @@ namespace WallpaperCreator.OnScreen {
 
                     chooseFileButton.set_filter (videoFilter);
                     chooseFileLabel.label = "Where is the video located?";
-                    locationEntry.placeholder_text = "/Users/cheesecakeufo/my_video.mp4";
+                    locationEntry.placeholder_text = @"$(Environment.get_user_special_dir(VIDEOS))/my_video.mp4";
                     locationEntry.set_sensitive(false);
                     
                     revealer.set_reveal_child(true);

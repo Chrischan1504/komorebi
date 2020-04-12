@@ -165,6 +165,7 @@ namespace Komorebi.Utilities {
 
 		// Default values
 		wallpaperName = "foggy_sunny_mountain";
+		wallpaperPath = @"/usr/share/komorebi/$wallpaperName";
 		timeTwentyFour = true;
 		showDesktopIcons = true;
 		enableVideoWallpapers = true;
@@ -193,6 +194,7 @@ namespace Komorebi.Utilities {
 		// make sure the config file has the required values
 		if(!configKeyFile.has_group(key_file_group) ||
 			!configKeyFile.has_key(key_file_group, "WallpaperName") ||
+			!configKeyFile.has_key(key_file_group, "WallpaperPath") ||
 			!configKeyFile.has_key(key_file_group, "TimeTwentyFour") ||
 			!configKeyFile.has_key(key_file_group, "ShowDesktopIcons") ||
 			!configKeyFile.has_key(key_file_group, "EnableVideoWallpapers")) {
@@ -204,6 +206,7 @@ namespace Komorebi.Utilities {
 
 
 		wallpaperName = configKeyFile.get_string (key_file_group, "WallpaperName");
+        wallpaperPath = configKeyFile.get_string (key_file_group, "WallpaperPath");
 		timeTwentyFour = configKeyFile.get_boolean (key_file_group, "TimeTwentyFour");
 		showDesktopIcons = configKeyFile.get_boolean (key_file_group, "ShowDesktopIcons");
 		enableVideoWallpapers = configKeyFile.get_boolean (key_file_group, "EnableVideoWallpapers");
@@ -216,6 +219,7 @@ namespace Komorebi.Utilities {
 		var key_file_group = "KomorebiProperties";
 
 		configKeyFile.set_string  (key_file_group, "WallpaperName", wallpaperName);
+		configKeyFile.set_string  (key_file_group, "WallpaperPath", wallpaperPath);
 		configKeyFile.set_boolean (key_file_group, "TimeTwentyFour", timeTwentyFour);
 		configKeyFile.set_boolean (key_file_group, "ShowDesktopIcons", showDesktopIcons);
 		configKeyFile.set_boolean (key_file_group, "EnableVideoWallpapers", enableVideoWallpapers);
@@ -328,7 +332,7 @@ namespace Komorebi.Utilities {
 		assetHeight = wallpaperKeyFile.get_integer ("Asset", "Height");
 
 		// Set GNOME's wallpaper to this
-		var wallpaperJpgPath = @"/usr/share/komorebi/$wallpaperName/wallpaper.jpg";
+		var wallpaperJpgPath = @"$wallpaperPath/wallpaper.jpg";
 		new GLib.Settings("org.gnome.desktop.background").set_string("picture-uri", ("file://" + wallpaperJpgPath));
 		new GLib.Settings("org.gnome.desktop.background").set_string("picture-options", "stretched");
 	}

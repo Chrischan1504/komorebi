@@ -46,9 +46,9 @@ namespace WallpaperCreator.OnScreen {
 
             titleLabel.set_markup("<span font='Lato 20'>Done</span>");
 
-            var mv_command = @"sudo mv $(Environment.get_home_dir())/$(wallpaperName.replace(" ", "_").replace(".", "_").down()) /usr/share/komorebi";
+            // var mv_command = @"sudo mv $(Environment.get_home_dir())/$(wallpaperName.replace(" ", "_").replace(".", "_").down()) /usr/share/komorebi";
 
-            descLabel.set_markup(@"<span font='Lato Light 12'>Open 'Terminal' then paste the following:\n<b>$mv_command</b>\nOnce done, you can change the wallpaper in <i>'Change Wallpaper'</i>.</span>");
+            // descLabel.set_markup(@"<span font='Lato Light 12'>Open 'Terminal' then paste the following:\n<b>$mv_command</b>\nOnce done, you can change the wallpaper in <i>'Change Wallpaper'</i>.</span>");
 
             closeButton.margin_top = 20;
             closeButton.halign = Align.CENTER;
@@ -75,7 +75,7 @@ namespace WallpaperCreator.OnScreen {
             // Create a new directory
             wallpaperName = wallpaperName.replace(" ", "_").replace(".", "_").down();
 
-            var dirPath = @"$(Environment.get_home_dir())/$(wallpaperName)";
+            var dirPath = @"$(Environment.get_user_data_dir())/komorebi/$(wallpaperName)";
             File.new_for_path(dirPath).make_directory_with_parents();
             var configPath = dirPath + "/config";
             var configFile = File.new_for_path(configPath);

@@ -22,6 +22,7 @@ namespace Komorebi.OnScreen {
 	private class Thumbnail : EventBox {
 
 		string name = "";
+		string path = "";
 
 		Overlay overlay = new Overlay();
 		Image thumbnailImage = new Image();
@@ -47,13 +48,15 @@ namespace Komorebi.OnScreen {
 		public Thumbnail (string path, string name) {
 
 			this.name = name;
+			this.path = path;
 
-			thumbnailImage.pixbuf = new Gdk.Pixbuf.from_file_at_scale(path + name + "/wallpaper.jpg", 150, 100, false);
+			thumbnailImage.pixbuf = new Gdk.Pixbuf.from_file_at_scale(path + "/wallpaper.jpg", 150, 100, false);
 
 			// Signals
 			button_release_event.connect(() => {
 				
 				wallpaperName = name;
+				wallpaperPath = path;
 				showBorder();
 				clicked();
 				

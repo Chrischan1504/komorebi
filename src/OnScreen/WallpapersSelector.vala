@@ -24,7 +24,6 @@ namespace Komorebi.OnScreen {
 
 	public class WallpapersSelector : ScrolledWindow {
 
-		public string path = "/usr/share/komorebi/";
 
 		Gtk.Grid grid = new Grid();
 
@@ -68,7 +67,9 @@ namespace Komorebi.OnScreen {
 			foreach(var thumbnail in thumbnailsList)
 				thumbnailsList.remove(thumbnail);
 
-			File wallpapersFolder = File.new_for_path("/usr/share/komorebi");
+			string[] wallpaperPaths = {"/usr/share/komorebi/", @"$(Environment.get_user_data_dir())/komorebi/"};
+			foreach (var path in wallpaperPaths) {
+				File wallpapersFolder = File.new_for_path(path);
 
 			try {
 
@@ -86,7 +87,7 @@ namespace Komorebi.OnScreen {
 						if (File.new_for_path(fullPath + "/wallpaper.jpg").query_exists() &&
 							File.new_for_path(fullPath + "/config").query_exists()) {
 
-							var thumbnail = new Thumbnail(path, name);
+							var thumbnail = new Thumbnail(fullPath, name);
 							
 							// Signals
 							thumbnail.clicked.connect(() => wallpaperChanged());
@@ -98,7 +99,15 @@ namespace Komorebi.OnScreen {
 					}
 
 			} catch {
-				print("Could not read directory '/usr/share/komorebi/'");
+				print(@"Could not read directory '$(path)'");
+
+				// create directory if it doesn't exist
+				try {
+					wallpapersFolder.make_directory();
+				} catch {
+					print(@"Could not create directory '$(path)'");
+				}
+			}
 			}
 		}
 
